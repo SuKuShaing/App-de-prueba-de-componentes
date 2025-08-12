@@ -1,19 +1,18 @@
+import { allRoutes } from "@/constants/Routes";
+import { useColorScheme } from "@/hooks/useColorScheme";
+import { useThemeColor } from "@/hooks/useThemeColor";
 import {
 	DarkTheme,
 	DefaultTheme,
 	ThemeProvider,
 } from "@react-navigation/native";
 import { useFonts } from "expo-font";
+import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
-
-import { useColorScheme } from "@/hooks/useColorScheme";
-
-import { useThemeColor } from "@/hooks/useThemeColor";
-import ThemedView from "@/presentation/shared/ThemedView";
-import ThemeText from "@/presentation/shared/ThemeText";
 import "../global.css";
+
 
 export default function RootLayout() {
 	const backgroundColor = useThemeColor({}, "background"); // background color basado en el tema del dispositivo
@@ -33,14 +32,31 @@ export default function RootLayout() {
 	}
 
 	return (
-		<GestureHandlerRootView style={{ backgroundColor: backgroundColor, flex: 1 }}>
+		<GestureHandlerRootView
+			style={{ backgroundColor: backgroundColor, flex: 1 }}
+		>
 			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-				<ThemedView margin safe>
-					<ThemeText className="mt-10 text-center" type="link" numberOfLines={1}>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
-					</ThemeText>
-				</ThemedView>
-				{/* <Stack> </Stack> */}
+				<Stack
+					screenOptions={{ // opciones de la pantalla
+						// headerShown: false, // para ocultar el header
+						headerShadowVisible: false,
+						contentStyle: {
+							backgroundColor: backgroundColor,
+						},
+						headerStyle: {
+							backgroundColor: backgroundColor,
+						},
+					}}
+				>
+					<Stack.Screen name="index" options={{ title: "" }} />
+
+					{
+						allRoutes.map((route) => (
+							<Stack.Screen key={route.name} name={route.name} options={{ title: route.title }} />
+						))
+					}
+
+				</Stack>
 				<StatusBar style="auto" />
 			</ThemeProvider>
 		</GestureHandlerRootView>
