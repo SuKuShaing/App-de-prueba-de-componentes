@@ -12,7 +12,7 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 
 import { useThemeColor } from "@/hooks/useThemeColor";
 import ThemedView from "@/presentation/shared/ThemedView";
-import { Text } from "react-native";
+import ThemeText from "@/presentation/shared/ThemeText";
 import "../global.css";
 
 export default function RootLayout() {
@@ -36,9 +36,9 @@ export default function RootLayout() {
 		<GestureHandlerRootView style={{ backgroundColor: backgroundColor, flex: 1 }}>
 			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
 				<ThemedView margin safe>
-					<Text className="text-3xl font-bold text-center text-light-primary dark:text-dark-primary">
-						Hola Mundo
-					</Text>
+					<ThemeText className="mt-10 text-center" type="link" numberOfLines={1}>
+						Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quos.
+					</ThemeText>
 				</ThemedView>
 				{/* <Stack> </Stack> */}
 				<StatusBar style="auto" />
