@@ -9,6 +9,16 @@ interface Props extends ViewProps {
 	bgColor?: string;
 }
 
+/**
+ * Envuelve el contenido de la pantalla en un View con un fondo y un padding superior según el safeArea listo para usar
+ * @param safe: Si se debe aplicar un padding superior según el safeArea
+ * @param margin: Si se debe aplicar un margen horizontal de 10px
+ * @param bgColor: Por sí deseas editar el color de fondo
+ * @param style: Por si desea añadir estilos adicionales
+ * @param className: Por si desea añadir clases adicionales
+ * @param children: Contenido del componente
+ * @returns Un View con un fondo y un padding superior según el safeArea listo para usar
+ */
 const ThemedView = ({ style, className, margin = false, safe = false, bgColor, children }: Props) => {
     const backgroundColor = bgColor ?? useThemeColor({}, "background");
     const safeArea = useSafeAreaInsets();
