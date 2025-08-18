@@ -32,9 +32,27 @@ const Switches = () => {
 					className="mb-2"
 					value={state.isActive}
 				/>
+				<ThemeSwitch
+					text="Hambriento"
+					onValueChange={(value) => setState({ ...state, isHungry: value })}
+					className="mb-2"
+					value={state.isHungry}
+				/>
+				<ThemeSwitch
+					text="Feliz"
+					onValueChange={(value) => setState({ ...state, isHappy: value })}
+					className="mb-2"
+					value={state.isHappy}
+				/>
 			</ThemeCard>
-			<Text className="text-center text-white text-xl">
+			<Text className="m-3 text-center text-dark-100 dark:text-light-100 text-xl">
 				IsActive: {state.isActive ? "Active" : "Inactive"}
+			</Text>
+			<Text className="m-3 text-center text-dark-100 dark:text-light-100 text-xl">
+				IsHungry: {state.isHungry ? "Hambriento" : "No hambriento"}
+			</Text>
+			<Text className="m-3 text-center text-dark-100 dark:text-light-100 text-xl">
+				IsHappy: {state.isHappy ? "Feliz" : "No feliz"}
 			</Text>
 		</ThemedView>
 	);
