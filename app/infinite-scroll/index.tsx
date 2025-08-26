@@ -1,9 +1,12 @@
+import { useThemeColor } from "@/hooks/useThemeColor";
 import ThemedView from "@/presentation/shared/ThemedView";
 import { useState } from "react";
-import { FlatList, Image } from "react-native";
+import { ActivityIndicator, FlatList, Image, View } from "react-native";
 
 const InfiniteScrollScreen = () => {
 	const [numbers, setNumbers] = useState([0, 1, 2, 3, 4, 5]);
+
+	const primaryColor = useThemeColor({}, "primary");
 
 	const loadMore = () => {
 		const newArray = Array.from(
@@ -11,7 +14,6 @@ const InfiniteScrollScreen = () => {
 			(_, index) => numbers.length + index + 1
 		);
 
-		console.log("Loading more...");
 		setTimeout(() => {
 			setNumbers([...numbers, ...newArray]);
 		}, 2000);
@@ -27,13 +29,27 @@ const InfiniteScrollScreen = () => {
 				// renderItem es el elemento que se renderiza en pantalla
 				onEndReached={loadMore}
 				// onEndReached es el evento que se ejecuta cuando el usuario llega al final de la lista
-				onEndReachedThreshold={0.4}
+				onEndReachedThreshold={0.1}
 				// onEndReachedThreshold es el umbral de la lista para que se ejecute el evento onEndReached
+				ListFooterComponent={() => (
+					<View
+						style={{
+							height: 150,
+							justifyContent: "center",
+							alignItems: "center",
+						}}
+					>
+						<ActivityIndicator size={40} color={primaryColor} />
+					</View>
+				)}
+				// ListFooterComponent es el componente que se renderiza al final de la lista, aquí mostramos el ActivityIndicator para indicar que se está cargando más contenido
 			/>
 		</ThemedView>
 	);
 };
 export default InfiniteScrollScreen;
+
+
 
 
 // Componente a Renderizar
