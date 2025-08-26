@@ -13,23 +13,24 @@ const ModalScreen = () => {
 	return (
 		<ThemedView
 			className="justify-center items-center flex-1"
-			bgColor="#A52182"
+			bgColor="#A52112"
 		>
 			<ThemeText type="h1" className="text-white font-bold">
-				Hola soy un modal
+				Hola soy otro modal, un modal dentro de otro modal
 			</ThemeText>
 
 			<ThemeButton
-				onPress={() => router.push('/modal/modal-window-2')}
+				onPress={() => router.dismiss()}
 				className="m-4"
 			>
-				abrir otro modal
+				Cerrar este modal
 			</ThemeButton>
 
 			<ThemeButton
-				onPress={() => router.dismiss()}
+				onPress={() => router.dismissAll()}
+				className="m-4"
 			>
-				Cerrar este modal
+				Cerrar todos los modales
 			</ThemeButton>
 
 			<StatusBar
