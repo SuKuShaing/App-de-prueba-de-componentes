@@ -2,6 +2,10 @@ import ThemedView from "@/presentation/shared/ThemedView";
 import ThemeText from "@/presentation/shared/ThemeText";
 import { Link } from "expo-router";
 
+/*
+Esta es la pantalla que se ocupa para abrir el modal.
+*/
+
 const ModalScreen = () => {
 	return (
 		<ThemedView margin>

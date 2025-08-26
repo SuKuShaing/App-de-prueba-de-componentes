@@ -1,6 +1,10 @@
 import { Stack } from "expo-router";
 import React from "react";
 
+/*
+Aquí se define el layout, de donde parte y qué modal se va a abrir.
+*/
+
 const ModalLayout = () => {
 	return (
 		<Stack screenOptions={{ headerShown: false }}>
