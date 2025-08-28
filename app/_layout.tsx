@@ -13,7 +13,6 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 import "../global.css";
 
-
 export default function RootLayout() {
 	const backgroundColor = useThemeColor({}, "background"); // background color basado en el tema del dispositivo
 	// const backgroundColor = useThemeColor({
@@ -37,7 +36,8 @@ export default function RootLayout() {
 		>
 			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
 				<Stack
-					screenOptions={{ // opciones de la pantalla
+					screenOptions={{
+						// opciones de la pantalla
 						// headerShown: false, // para ocultar el header
 						headerShadowVisible: false,
 						contentStyle: {
@@ -50,12 +50,19 @@ export default function RootLayout() {
 				>
 					<Stack.Screen name="index" options={{ title: "" }} />
 
-					{
-						allRoutes.map((route) => (
-							<Stack.Screen key={route.name} name={route.name} options={{ title: route.title }} />
-						))
-					}
-
+					{allRoutes.map((route) => (
+						<Stack.Screen
+							key={route.name}
+							name={route.name}
+							options={{
+								title: route.title,
+								headerShown: !route.title.includes("Slides"),
+							}}
+							// headerShown: !route.title.includes("Slides")
+							// para que no se muestre el header con la flecha de volver en las pantallas de slides
+							// slide debe ser escrito exactamente igual al nombre de la ruta, para que se pueda usar el !includes y es Slides, con mayúscula
+						/>
+					))}
 				</Stack>
 				<StatusBar style="auto" />
 			</ThemeProvider>
