@@ -1,11 +1,7 @@
 import { allRoutes } from "@/constants/Routes";
 import { useColorScheme } from "@/hooks/useColorScheme";
 import { useThemeColor } from "@/hooks/useThemeColor";
-import {
-	DarkTheme,
-	DefaultTheme,
-	ThemeProvider,
-} from "@react-navigation/native";
+import { ThemeChangerProvider } from "@/presentation/context/ThemeChangerContext";
 import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
@@ -34,7 +30,9 @@ export default function RootLayout() {
 		<GestureHandlerRootView
 			style={{ backgroundColor: backgroundColor, flex: 1 }}
 		>
-			<ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
+			{/* <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}> */}
+			<ThemeChangerProvider>
+
 				<Stack
 					screenOptions={{
 						// opciones de la pantalla
@@ -47,25 +45,26 @@ export default function RootLayout() {
 							backgroundColor: backgroundColor,
 						},
 					}}
-				>
+					>
 					<Stack.Screen name="index" options={{ title: "" }} />
 
 					{allRoutes.map((route) => (
 						<Stack.Screen
-							key={route.name}
-							name={route.name}
-							options={{
-								title: route.title,
-								headerShown: !route.title.includes("Slides"),
-							}}
+						key={route.name}
+						name={route.name}
+						options={{
+							title: route.title,
+							headerShown: !route.title.includes("Slides"),
+						}}
 							// headerShown: !route.title.includes("Slides")
 							// para que no se muestre el header con la flecha de volver en las pantallas de slides
 							// slide debe ser escrito exactamente igual al nombre de la ruta, para que se pueda usar el !includes y es Slides, con mayúscula
-						/>
-					))}
+							/>
+						))}
 				</Stack>
 				<StatusBar style="auto" />
-			</ThemeProvider>
+			</ThemeChangerProvider>
+			{/* </ThemeProvider> */}
 		</GestureHandlerRootView>
 	);
 }
